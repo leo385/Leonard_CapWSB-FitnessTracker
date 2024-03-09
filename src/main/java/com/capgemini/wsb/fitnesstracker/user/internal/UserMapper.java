@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 @Component
 class UserMapper {
 
+    User toEntity(UserDto dto){
+        return new User(dto.firstName(), dto.lastName(), dto.birthdate(), dto.email());
+    }
+
     UserDto toDto(User user) {
         return new UserDto(user.getId(),
                            user.getFirstName(),
@@ -13,5 +17,4 @@ class UserMapper {
                            user.getBirthdate(),
                            user.getEmail());
     }
-
 }
