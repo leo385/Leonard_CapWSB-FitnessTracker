@@ -1,8 +1,9 @@
-package com.capgemini.wsb.fitnesstracker.user.internal;
+package com.capgemini.wsb.fitnesstracker.user.internal.impl;
 
-import com.capgemini.wsb.fitnesstracker.user.api.User;
-import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
-import com.capgemini.wsb.fitnesstracker.user.api.UserService;
+import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
+import com.capgemini.wsb.fitnesstracker.user.api.provider.UserProvider;
+import com.capgemini.wsb.fitnesstracker.user.api.service.UserService;
+import com.capgemini.wsb.fitnesstracker.user.internal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,12 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class UserServiceImpl implements UserService, UserProvider {
+public class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
 
     @Override
-    public User createUser(final User user) {
+    public UserEntity createUser(final UserEntity user) {
         log.info("Creating User {}", user);
         if (user.getId() != null) {
             throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
@@ -27,17 +28,23 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public Optional<User> getUser(final Long userId) {
+    public Optional<UserEntity> getUser(final Long userId) {
+
         return userRepository.findById(userId);
     }
 
     @Override
-    public Optional<User> getUserByEmail(final String email) {
+    public Optional<UserEntity> getUserByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<UserEntity> getUsersByAge(final int age) {
+        return userRepository.findByAgeGreaterThan(age);
+    }
+
+    @Override
+    public List<UserEntity> findAllUsers() {
         return userRepository.findAll();
     }
 
@@ -51,7 +58,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public User updateUser(Long id, User updatedUser){
+    public UserEntity updateUser(Long id, UserEntity updatedUser){
         return userRepository.findById(id)
                 .map(user -> {
                     user.setFirstName(updatedUser.getFirstName());

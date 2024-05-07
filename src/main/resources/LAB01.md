@@ -17,7 +17,7 @@ Jako użytkownik systemu, chcę mieć możliwość zarządzania użytkownikami s
 - móc wprowadzać nowych użytkowników do systemu
 - móc usuwać użytkowników z systemu
 - móc aktualizować użytkowników
--
+
 
 ### Wymagania funkcjonalne
 

@@ -1,9 +1,10 @@
-package com.capgemini.wsb.fitnesstracker.user.api;
+package com.capgemini.wsb.fitnesstracker.user.api.exceptions;
 
 import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
+import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
 
 /**
- * Exception indicating that the {@link User} was not found.
+ * Exception indicating that the {@link UserEntity} was not found.
  */
 @SuppressWarnings("squid:S110")
 public class UserNotFoundException extends NotFoundException {

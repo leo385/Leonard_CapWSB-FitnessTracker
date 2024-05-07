@@ -1,4 +1,4 @@
-package com.capgemini.wsb.fitnesstracker.user.internal;
+package com.capgemini.wsb.fitnesstracker.user.internal.beans;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;

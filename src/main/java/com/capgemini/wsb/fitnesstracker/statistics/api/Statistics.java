@@ -1,6 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.statistics.api;
 
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +18,7 @@ public class Statistics {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;

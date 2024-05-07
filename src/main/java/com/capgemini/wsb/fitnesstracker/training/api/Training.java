@@ -1,7 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.training.api;
 
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,7 +22,7 @@ public class Training {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     @Column(name = "start_time", nullable = false)
     private Date startTime;
@@ -41,7 +41,7 @@ public class Training {
     private double averageSpeed;
 
     public Training(
-            final User user,
+            final UserEntity user,
             final Date startTime,
             final Date endTime,
             final ActivityType activityType,

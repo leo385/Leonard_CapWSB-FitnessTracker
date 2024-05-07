@@ -1,7 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
 
 import java.util.Optional;
 
@@ -9,7 +9,7 @@ import java.util.Optional;
 public class TrainingServiceImpl implements TrainingProvider {
 
     @Override
-    public Optional<User> getTraining(final Long trainingId) {
+    public Optional<UserEntity> getTraining(final Long trainingId) {
         throw new UnsupportedOperationException("Not finished yet");
     }
 

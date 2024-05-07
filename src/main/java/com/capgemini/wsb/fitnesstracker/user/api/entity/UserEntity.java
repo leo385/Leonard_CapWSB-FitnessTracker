@@ -1,4 +1,4 @@
-package com.capgemini.wsb.fitnesstracker.user.api;
+package com.capgemini.wsb.fitnesstracker.user.api.entity;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    public User(
+    public UserEntity(
             final String firstName,
             final String lastName,
             final LocalDate birthdate,

@@ -2,7 +2,7 @@ package com.capgemini.wsb.fitnesstracker.loader;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ import static java.util.Objects.isNull;
 class InitialDataLoader {
 
     @Autowired
-    private JpaRepository<User, Long> userRepository;
+    private JpaRepository<UserEntity, Long> userRepository;
 
     @Autowired
     private JpaRepository<Training, Long> trainingRepository;
@@ -45,23 +45,23 @@ class InitialDataLoader {
 
         log.info("Loading initial data to the database");
 
-        List<User> sampleUserList = generateSampleUsers();
+        List<UserEntity> sampleUserList = generateSampleUsers();
         List<Training> sampleTrainingList = generateTrainingData(sampleUserList);
 
 
         log.info("Finished loading initial data");
     }
 
-    private User generateUser(String name, String lastName, int age) {
-        User user = new User(name,
+    private UserEntity generateUser(String name, String lastName, int age) {
+        UserEntity user = new UserEntity(name,
                              lastName,
                              now().minusYears(age),
                              "%s.%s@domain.com".formatted(name, lastName));
         return userRepository.save(user);
     }
 
-    private List<User> generateSampleUsers() {
-        List<User> users = new ArrayList<>();
+    private List<UserEntity> generateSampleUsers() {
+        List<UserEntity> users = new ArrayList<>();
 
         users.add(generateUser("Emma", "Johnson", 28));
         users.add(generateUser("Ethan", "Taylor", 51));
@@ -77,7 +77,7 @@ class InitialDataLoader {
         return users;
     }
 
-    private List<Training> generateTrainingData(List<User> users) {
+    private List<Training> generateTrainingData(List<UserEntity> users) {
         List<Training> trainingData = new ArrayList<>();
 
         try {
