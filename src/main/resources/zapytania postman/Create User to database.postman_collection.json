@@ -1,0 +1,34 @@
+{
+	"info": {
+		"_postman_id": "25dd3a41-a47d-4664-b88c-5c4af54bdbe1",
+		"name": "Create User to database",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22915759"
+	},
+	"item": [
+		{
+			"name": "Create user in database",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/users/qweqwew/asdasd/1986-08-21/qzczxcwe@qwe.pl",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"qweqwew",
+						"asdasd",
+						"1986-08-21",
+						"qzczxcwe@qwe.pl"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

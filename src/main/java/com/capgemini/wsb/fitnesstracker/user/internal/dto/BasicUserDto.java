@@ -5,5 +5,5 @@ import jakarta.annotation.Nullable;
 /*
     DTO for basic information about user.
  */
-public record BasicUserDto(@Nullable Long id, String name) {
+public record BasicUserDto(@Nullable Long Id, String firstName, String lastName) {
 }

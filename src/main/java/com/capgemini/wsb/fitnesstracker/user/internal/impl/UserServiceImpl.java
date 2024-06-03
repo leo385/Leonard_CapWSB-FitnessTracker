@@ -6,8 +6,11 @@ import com.capgemini.wsb.fitnesstracker.user.api.service.UserService;
 import com.capgemini.wsb.fitnesstracker.user.internal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +31,7 @@ public class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public Optional<UserEntity> getUser(final Long userId) {
+    public Optional<UserEntity> getUserById(final Long userId) {
 
         return userRepository.findById(userId);
     }
@@ -74,4 +77,7 @@ public class UserServiceImpl implements UserService, UserProvider {
                 });
     }
 
+    public Collection<UserEntity> findUsersByTheirGreaterAge(LocalDate time) {
+        return userRepository.findUsersByTheirGreaterAge(time);
+    }
 }

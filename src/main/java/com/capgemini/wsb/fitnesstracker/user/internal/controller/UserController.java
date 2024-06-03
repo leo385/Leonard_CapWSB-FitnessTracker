@@ -8,6 +8,8 @@ import com.capgemini.wsb.fitnesstracker.user.internal.dto.UserDto;
 import com.capgemini.wsb.fitnesstracker.user.internal.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +43,7 @@ class UserController {
      */
     @GetMapping("/{id}")
     public List<UserDto> getUserById(@PathVariable("id") Long id) {
-            return userService.getUser(id).stream().map(userMapper::toDto).toList();
+            return userService.getUserById(id).stream().map(userMapper::toDto).toList();
 
     }
 
@@ -52,7 +54,7 @@ class UserController {
     @GetMapping("/by-basic")
     public List<BasicUserDto> getBasicInformationUsersById(@RequestParam("id") Long id)
     {
-        return userService.getUser(id).stream().map(userMapper::basicToDto).toList();
+        return userService.getUserById(id).stream().map(userMapper::basicToDto).toList();
     }
 
     /**
@@ -79,6 +81,7 @@ class UserController {
      *
      */
     @PostMapping("/{firstname}/{lastname}/{birthdate}/{email}")
+    @ResponseStatus(HttpStatus.CREATED)
     public void addUserToDatabase(@PathVariable("firstname") String firstname,
                                   @PathVariable("lastname") String lastname,
                                   @PathVariable("birthdate") LocalDate birthdate,
@@ -89,20 +92,25 @@ class UserController {
 
     }
 
+
+    // Na potrzeby testu tworzącego użytkownika.
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserEntity addUserToDatabase(@RequestBody UserDto userDto) throws InterruptedException {
+        UserEntity user = userMapper.toEntity(userDto);
+        return userService.createUser(user);
+    }
+
     /**
      * DELETE user from database.
      *
      */
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteUserFromDatabase(@PathVariable("id") Long id){
-        boolean isDeleted = userService.deleteUser(id);
 
-        if(isDeleted){
-            return ResponseEntity.ok().build();
-        }
-        else{
-            return ResponseEntity.notFound().build();
-        }
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUserFromDatabase(@PathVariable("id") Long id){
+
+        userService.deleteUser(id);
 
     }
 
@@ -121,6 +129,31 @@ class UserController {
             UserDto userdto = userMapper.toDto(updatedUser);
 
             return ResponseEntity.ok(userdto);
+    }
+
+
+    // Na potrzeby testu aktualizującego użytkownika
+    @PutMapping("/{id}")
+    public UserEntity updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        return userService.updateUser(id, userMapper.toEntity(userDto));
+    }
+
+
+    @GetMapping("/simple")
+    public List<BasicUserDto> getAllBasicUsers() {
+        return userService.findAllUsers()
+                .stream()
+                .map(userMapper::basicToDto)
+                .toList();
+    }
+
+
+    @GetMapping("/older/{time}")
+    public List<UserDto> getUserOlderThan(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate time) {
+        return userService.findUsersByTheirGreaterAge(time)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
 }

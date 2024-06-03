@@ -1,10 +1,12 @@
 package com.capgemini.wsb.fitnesstracker.user.api.provider;
 
 import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface UserProvider {
 
     /**
@@ -14,7 +16,7 @@ public interface UserProvider {
      * @param userId id of the user to be searched
      * @return An {@link Optional} containing the located user, or {@link Optional#empty()} if not found
      */
-    Optional<UserEntity> getUser(Long userId);
+    Optional<UserEntity> getUserById(Long userId);
 
     /**
      * Retrieves a user based on their email.
