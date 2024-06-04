@@ -1,6 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.loader;
 
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
+import com.capgemini.wsb.fitnesstracker.training.api.entity.TrainingEntity;
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
 import lombok.ToString;
@@ -35,7 +35,7 @@ class InitialDataLoader {
     private JpaRepository<UserEntity, Long> userRepository;
 
     @Autowired
-    private JpaRepository<Training, Long> trainingRepository;
+    private JpaRepository<TrainingEntity, Long> trainingRepository;
 
     @EventListener
     @Transactional
@@ -46,7 +46,7 @@ class InitialDataLoader {
         log.info("Loading initial data to the database");
 
         List<UserEntity> sampleUserList = generateSampleUsers();
-        List<Training> sampleTrainingList = generateTrainingData(sampleUserList);
+        List<TrainingEntity> sampleTrainingList = generateTrainingData(sampleUserList);
 
 
         log.info("Finished loading initial data");
@@ -77,67 +77,67 @@ class InitialDataLoader {
         return users;
     }
 
-    private List<Training> generateTrainingData(List<UserEntity> users) {
-        List<Training> trainingData = new ArrayList<>();
+    private List<TrainingEntity> generateTrainingData(List<UserEntity> users) {
+        List<TrainingEntity> trainingData = new ArrayList<>();
 
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-            Training training1 = new Training(users.get(0),
+            TrainingEntity training1 = new TrainingEntity(users.get(0),
                                               sdf.parse("2024-01-19 08:00:00"),
                                               sdf.parse("2024-01-19 09:30:00"),
                                               ActivityType.RUNNING,
                                               10.5,
                                               8.2);
-            Training training2 = new Training(users.get(1),
+            TrainingEntity training2 = new TrainingEntity(users.get(1),
                                               sdf.parse("2024-01-18 15:30:00"),
                                               sdf.parse("2024-01-18 17:00:00"),
                                               ActivityType.CYCLING,
                                               25.0,
                                               18.5);
-            Training training3 = new Training(users.get(2),
+            TrainingEntity training3 = new TrainingEntity(users.get(2),
                                               sdf.parse("2024-01-17 07:45:00"),
                                               sdf.parse("2024-01-17 09:00:00"),
                                               ActivityType.WALKING,
                                               5.2,
                                               5.8);
-            Training training4 = new Training(users.get(3),
+            TrainingEntity training4 = new TrainingEntity(users.get(3),
                                               sdf.parse("2024-01-16 18:00:00"),
                                               sdf.parse("2024-01-16 19:30:00"),
                                               ActivityType.RUNNING,
                                               12.3,
                                               9.0);
-            Training training5 = new Training(users.get(4),
+            TrainingEntity training5 = new TrainingEntity(users.get(4),
                                               sdf.parse("2024-01-15 12:30:00"),
                                               sdf.parse("2024-01-15 13:45:00"),
                                               ActivityType.CYCLING,
                                               18.7,
                                               15.3);
-            Training training6 = new Training(users.get(5),
+            TrainingEntity training6 = new TrainingEntity(users.get(5),
                                               sdf.parse("2024-01-14 09:00:00"),
                                               sdf.parse("2024-01-14 10:15:00"),
                                               ActivityType.WALKING,
                                               3.5,
                                               4.0);
-            Training training7 = new Training(users.get(6),
+            TrainingEntity training7 = new TrainingEntity(users.get(6),
                                               sdf.parse("2024-01-13 16:45:00"),
                                               sdf.parse("2024-01-13 18:30:00"),
                                               ActivityType.RUNNING,
                                               15.0,
                                               10.8);
-            Training training8 = new Training(users.get(7),
+            TrainingEntity training8 = new TrainingEntity(users.get(7),
                                               sdf.parse("2024-01-12 11:30:00"),
                                               sdf.parse("2024-01-12 12:45:00"),
                                               ActivityType.CYCLING,
                                               22.5,
                                               17.2);
-            Training training9 = new Training(users.get(8),
+            TrainingEntity training9 = new TrainingEntity(users.get(8),
                                               sdf.parse("2024-01-11 07:15:00"),
                                               sdf.parse("2024-01-11 08:30:00"),
                                               ActivityType.WALKING,
                                               4.2,
                                               4.5);
-            Training training10 = new Training(users.get(9),
+            TrainingEntity training10 = new TrainingEntity(users.get(9),
                                                sdf.parse("2024-01-10 14:00:00"),
                                                sdf.parse("2024-01-10 15:15:00"),
                                                ActivityType.RUNNING,

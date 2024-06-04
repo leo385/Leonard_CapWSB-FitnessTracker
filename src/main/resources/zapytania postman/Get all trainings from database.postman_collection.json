@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "dbf3ac8f-b883-44eb-9e29-a62880bd6c23",
+		"name": "Get all trainings from database",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22915759"
+	},
+	"item": [
+		{
+			"name": "get all trainings from database",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

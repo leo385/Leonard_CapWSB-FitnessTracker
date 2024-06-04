@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "94ebfc5e-9de6-4692-af6e-4f37e95fab55",
+		"name": "Update trainings in database",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22915759"
+	},
+	"item": [
+		{
+			"name": "Update trainings in database",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

@@ -1,6 +1,6 @@
 package com.capgemini.wsb.fitnesstracker;
 
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
+import com.capgemini.wsb.fitnesstracker.training.api.entity.TrainingEntity;
 import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
@@ -19,7 +19,7 @@ public abstract class IntegrationTestBase {
     private JpaRepository<UserEntity, Long> userRepository;
 
     @Autowired
-    private JpaRepository<Training, Long> trainingRepository;
+    private JpaRepository<TrainingEntity, Long> trainingRepository;
 
     @AfterEach
     void cleanUpDB() {
@@ -35,7 +35,7 @@ public abstract class IntegrationTestBase {
 
     }
 
-    protected Training persistTraining(Training training) {
+    protected TrainingEntity persistTraining(TrainingEntity training) {
         return trainingRepository.save(training);
     }
 
@@ -48,13 +48,13 @@ public abstract class IntegrationTestBase {
         return userRepository.findAll();
     }
 
-    protected List<Training> createAllTrainings(List<Training> trainings) {
+    protected List<TrainingEntity> createAllTrainings(List<TrainingEntity> trainings) {
 
         trainings.forEach(training -> trainingRepository.save(training));
         return trainings;
     }
 
-    protected List<Training> getAllTrainings() {
+    protected List<TrainingEntity> getAllTrainings() {
         return trainingRepository.findAll();
     }
 

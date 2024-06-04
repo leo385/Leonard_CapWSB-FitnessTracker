@@ -1,9 +1,10 @@
-package com.capgemini.wsb.fitnesstracker.training.api;
+package com.capgemini.wsb.fitnesstracker.training.api.exceptions;
 
 import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
+import com.capgemini.wsb.fitnesstracker.training.api.entity.TrainingEntity;
 
 /**
- * Exception indicating that the {@link Training} was not found.
+ * Exception indicating that the {@link TrainingEntity} was not found.
  */
 @SuppressWarnings("squid:S110")
 public class TrainingNotFoundException extends NotFoundException {

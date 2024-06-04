@@ -1,0 +1,37 @@
+{
+	"info": {
+		"_postman_id": "804a0e12-a76c-4f8b-9797-8dc0a30118ea",
+		"name": "Add training to database",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22915759"
+	},
+	"item": [
+		{
+			"name": "Add training to database",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/trainings/1/1/12-02-2023/12-02-2023/\"CYCLING\"/5/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings",
+						"1",
+						"1",
+						"12-02-2023",
+						"12-02-2023",
+						"\"CYCLING\"",
+						"5",
+						"8"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

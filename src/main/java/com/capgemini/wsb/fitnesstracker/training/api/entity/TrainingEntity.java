@@ -1,20 +1,18 @@
-package com.capgemini.wsb.fitnesstracker.training.api;
+package com.capgemini.wsb.fitnesstracker.training.api.entity;
 
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 @Entity
 @Table(name = "trainings")
+@Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class Training {
+public class TrainingEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +38,7 @@ public class Training {
     @Column(name = "average_speed")
     private double averageSpeed;
 
-    public Training(
+    public TrainingEntity(
             final UserEntity user,
             final Date startTime,
             final Date endTime,

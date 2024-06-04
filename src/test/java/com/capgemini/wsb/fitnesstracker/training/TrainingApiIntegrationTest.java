@@ -2,7 +2,7 @@ package com.capgemini.wsb.fitnesstracker.training;
 
 import com.capgemini.wsb.fitnesstracker.IntegrationTest;
 import com.capgemini.wsb.fitnesstracker.IntegrationTestBase;
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
+import com.capgemini.wsb.fitnesstracker.training.api.entity.TrainingEntity;
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
     void shouldReturnAllTrainings_whenGettingAllTrainings() throws Exception {
 
         UserEntity user1 = existingUser(generateClient());
-        Training training1 = persistTraining(generateTraining(user1));
+        TrainingEntity training1 = persistTraining(generateTraining(user1));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+00:00");
         sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
         mockMvc.perform(get("/v1/trainings").contentType(MediaType.APPLICATION_JSON))
@@ -59,7 +59,7 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
     void shouldReturnAllTrainingsForDedicatedUser_whenGettingAllTrainingsForDedicatedUser() throws Exception {
 
         UserEntity user1 = existingUser(generateClient());
-        Training training1 = persistTraining(generateTraining(user1));
+        TrainingEntity training1 = persistTraining(generateTraining(user1));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+00:00");
         sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
         mockMvc.perform(get("/v1/trainings/{userId}", user1.getId()).contentType(MediaType.APPLICATION_JSON))
@@ -82,8 +82,8 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
     void shouldReturnAllFinishedTrainingsAfterTime_whenGettingAllFinishedTrainingsAfterTime() throws Exception {
 
         UserEntity user1 = existingUser(generateClient());
-        Training training1 = persistTraining(generateTrainingWithDetails(user1, "2024-05-19 19:00:00", "2024-05-19 20:30:00", ActivityType.RUNNING, 14, 11.5));
-        Training training2 = persistTraining(generateTrainingWithDetails(user1, "2024-05-17 19:00:00", "2024-05-17 20:30:00", ActivityType.RUNNING, 14, 11.5));
+        TrainingEntity training1 = persistTraining(generateTrainingWithDetails(user1, "2024-05-19 19:00:00", "2024-05-19 20:30:00", ActivityType.RUNNING, 14, 11.5));
+        TrainingEntity training2 = persistTraining(generateTrainingWithDetails(user1, "2024-05-17 19:00:00", "2024-05-17 20:30:00", ActivityType.RUNNING, 14, 11.5));
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+00:00");
         sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
@@ -106,9 +106,9 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
     void getAllTrainingByActivityType_whenGettingAllTrainingByActivityType() throws Exception {
 
         UserEntity user1 = existingUser(generateClient());
-        Training training1 = persistTraining(generateTrainingWithActivityType(user1, ActivityType.RUNNING));
-        Training training2 = persistTraining(generateTrainingWithActivityType(user1, ActivityType.TENNIS));
-        Training training3 = persistTraining(generateTrainingWithActivityType(user1, ActivityType.TENNIS));
+        TrainingEntity training1 = persistTraining(generateTrainingWithActivityType(user1, ActivityType.RUNNING));
+        TrainingEntity training2 = persistTraining(generateTrainingWithActivityType(user1, ActivityType.TENNIS));
+        TrainingEntity training3 = persistTraining(generateTrainingWithActivityType(user1, ActivityType.TENNIS));
 
         mockMvc.perform(get("/v1/trainings/activityType").param("activityType", "TENNIS").contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
@@ -159,7 +159,7 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
     void shouldUpdateTraining_whenUpdatingTraining() throws Exception {
 
         UserEntity user1 = existingUser(generateClient());
-        Training training1 = persistTraining(generateTrainingWithActivityType(user1, ActivityType.RUNNING));
+        TrainingEntity training1 = persistTraining(generateTrainingWithActivityType(user1, ActivityType.RUNNING));
         String requestBody = """
                 {
                 "userId": "%s",
@@ -186,10 +186,10 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
         return new UserEntity(randomUUID().toString(), randomUUID().toString(), now(), randomUUID().toString());
     }
 
-    private static Training generateTraining(UserEntity user) throws ParseException {
+    private static TrainingEntity generateTraining(UserEntity user) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        return new Training(
+        return new TrainingEntity(
                 user,
                 sdf.parse("2024-01-19 08:00:00"),
                 sdf.parse("2024-01-19 09:30:00"),
@@ -198,10 +198,10 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
                 8.2);
     }
 
-    private static Training generateTrainingWithActivityType(UserEntity user, ActivityType activityType) throws ParseException {
+    private static TrainingEntity generateTrainingWithActivityType(UserEntity user, ActivityType activityType) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        return new Training(
+        return new TrainingEntity(
                 user,
                 sdf.parse("2024-01-19 08:00:00"),
                 sdf.parse("2024-01-19 09:30:00"),
@@ -209,10 +209,10 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
                 0, 0);
     }
 
-    private static Training generateTrainingWithDetails(UserEntity user, String startTime, String endTime, ActivityType activityType, double distance, double averageSpeed) throws ParseException {
+    private static TrainingEntity generateTrainingWithDetails(UserEntity user, String startTime, String endTime, ActivityType activityType, double distance, double averageSpeed) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        return new Training(
+        return new TrainingEntity(
                 user,
                 sdf.parse(startTime),
                 sdf.parse(endTime),
