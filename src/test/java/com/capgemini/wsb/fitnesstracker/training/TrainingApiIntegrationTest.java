@@ -30,6 +30,13 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
     @Autowired
     private MockMvc mockMvc;
 
+
+    @Test
+    public void shouldReturnAllTrainings() throws Exception {
+        mockMvc.perform(get("/v1/trainings"))
+                .andExpect(status().isOk());
+    }
+
     @Test
     void shouldReturnAllTrainings_whenGettingAllTrainings() throws Exception {
 
@@ -87,7 +94,7 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+00:00");
         sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
-        mockMvc.perform(get("/v1/trainings/finished/{afterTime}", "2024-05-18").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/trainings/done/{time}", "2024-05-18").contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())

@@ -13,11 +13,15 @@ import com.capgemini.wsb.fitnesstracker.training.api.entity.TrainingEntity;
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 import com.capgemini.wsb.fitnesstracker.training.internal.repository.TrainingRepository;
 import com.capgemini.wsb.fitnesstracker.user.api.entity.UserEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+@RequiredArgsConstructor
 @Service
 public class TrainingServiceImpl implements TrainingProvider {
+
+    private final TrainingRepository trainingRepository;
 
     @Override
     public TrainingEntity createTrainingInDatabase(TrainingEntity training) {
@@ -42,8 +46,6 @@ public class TrainingServiceImpl implements TrainingProvider {
         return trainingRepository.save(training);
     }
 
-
-    private TrainingRepository trainingRepository;
 
     @Override
     public void deleteTrainingFromDatabaseByUserId(Long userId) {

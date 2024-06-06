@@ -9,8 +9,9 @@ import com.capgemini.wsb.fitnesstracker.training.api.dto.TrainingDto;
 import com.capgemini.wsb.fitnesstracker.training.api.entity.TrainingEntity;
 
 
-@RequiredArgsConstructor
+
 @Component
+@RequiredArgsConstructor
 public class TrainingMapper {
 
 

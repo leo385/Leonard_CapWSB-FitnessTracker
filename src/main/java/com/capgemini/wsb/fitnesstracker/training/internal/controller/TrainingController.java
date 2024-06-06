@@ -18,7 +18,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/trainings")
 @RequiredArgsConstructor
-public class TrainingController {
+
+class TrainingController {
 
     private final TrainingServiceImpl trainingService;
 
