@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TrainingServiceImpl implements TrainingProvider {
 
+
     private final TrainingRepository trainingRepository;
 
     @Override
